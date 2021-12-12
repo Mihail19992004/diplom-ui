@@ -166,8 +166,7 @@ export const Registration = observer ((): ReactElement => {
                     disabledStyle={buttonDisableStyle}
                 />
 
-            </form
-            >
+            </form>
         </Box>
     );
 });

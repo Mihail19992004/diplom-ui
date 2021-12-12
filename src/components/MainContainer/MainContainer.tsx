@@ -1,10 +1,13 @@
 import React from 'react';
-import {Box, makeStyles, TextField} from "@material-ui/core";
+import {Box, makeStyles, Typography, ButtonGroup} from "@material-ui/core";
 import Logo from '../../assets/img/logo.png'
 import {CarouselSlider} from "../Carousel/Carousel";
 import CustomButton from "../Button/CustomButton";
-import {Link} from "react-router-dom";
+import permissionStore from "../../stores/permissionStore/permissionStore";
 import PersonIcon from '@mui/icons-material/Person';
+import Menu from "../Menu/Menu";
+import CustomLink from "../CustomLink/CustomLink";
+import CategoryContent from "../CategoryContent/CategoryContent";
 
 const settings = {
     dots: true,
@@ -55,23 +58,46 @@ const useStyle = makeStyles((theme) => ({
 
 const MainContainer = () => {
     const classes = useStyle()
+    const {permissionRole} = permissionStore
     return (
         <Box className={classes.mainContainer}>
             <Box className={classes.rootContainer}>
                 <Box className={classes.headerContainer}>
                     <img className={classes.logoContainer} src={Logo} alt=""/>
-
-                    <CustomButton
-                        style={{ height: 50, width: 15, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        isLoading={false}
-                        content={<Link style={{textDecoration: 'none'}} to="/auth"><PersonIcon /></Link>}
-                        isDisabled={false}
-                        variant={"contained"}
-                    />
+                    <ButtonGroup>
+                        <CustomButton
+                            style={{ height: 50, width: 15, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            isLoading={false}
+                            content={
+                                <CustomLink to="/auth">
+                                    <PersonIcon />
+                                </CustomLink>
+                            }
+                            isDisabled={false}
+                            variant={"contained"}
+                        />
+                        {
+                            permissionRole === 'admin'
+                                && <CustomButton
+                                    isLoading={false}
+                                    content={
+                                        <CustomLink to='/admin'>
+                                            <Typography variant={"button"}>
+                                                Administration
+                                            </Typography>
+                                        </CustomLink>
+                                    }
+                                    isDisabled={false}
+                                    variant={'contained'}
+                        />
+                        }
+                    </ButtonGroup>
                 </Box>
                 <Box className={classes.carouselContainer}>
                     <CarouselSlider />
                 </Box>
+                <Menu />
+                <CategoryContent />
             </Box>
         </Box>
     );
