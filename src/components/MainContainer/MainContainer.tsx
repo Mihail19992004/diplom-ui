@@ -16,11 +16,11 @@ const settings = {
 
 const useStyle = makeStyles((theme) => ({
     mainContainer: {
-        width: '100%',
-        minHeight: '100vh',
-        background: 'rgba(255, 189, 128, 1)',
-        display: 'flex',
-        justifyContent: 'center'
+        // width: '99%',
+        // minHeight: '100vh',
+        // background: 'rgba(255, 189, 128, 1)',
+        // display: 'flex',
+        // justifyContent: 'center'
     },
     rootContainer: {
         minWidth: theme.spacing(170),
